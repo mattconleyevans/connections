@@ -2,7 +2,6 @@
 from flask import Flask, request, jsonify
 from openai import OpenAI
 import random
-from dotenv import load_dotenv
 from flask_cors import CORS
 
 app = Flask(__name__)
