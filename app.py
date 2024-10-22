@@ -14,7 +14,7 @@ client = OpenAI()
 def generate_categories(theme):
     prompt = (
         f"Generate a list of 4 distinct categories of increasing difficulty based on the theme '{theme}', "
-        "and provide 4 words that belong in each category. You should be inspired by the categories in the New York Times game Connections."
+        "and provide 4 words that belong in each category. You should be inspired by the categories in the New York Times game Connections. You must not repeat words across multiple categories."
         "The output should follow this exact structure: "
         "Category 1: [category name], Words: [word1, word2, word3, word4] "
         "Category 2: [category name], Words: [word1, word2, word3, word4] "
