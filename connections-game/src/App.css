@@ -1,0 +1,93 @@
+/* App.css */
+.App {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+input {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+button {
+    padding: 10px;
+    font-size: 18px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.word-button {
+    width: 180px;  /* Increased width */
+    height: 60px;  /* Decreased height */
+    font-size: 20px;  /* Adjusted font size */
+    margin: 4px;
+    background-color: lightgrey;
+    border: 2px solid black;  /* Ensuring a black border */
+    transition: background-color 0.3s, border-color 0.3s;
+    display: inline-block;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.selected {
+    background-color: darkgrey;
+    color: white;
+    border: 2px solid black;  /* Keeping the black border when selected */
+}
+
+.found {
+    color: black;
+    cursor: not-allowed;
+    border: 2px solid black;  /* Ensuring the black border when found */
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 780px;  /* Adjusted to accommodate wider buttons */
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 24px;
+    color: blue;
+}
+
+.tries {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.categories-found {
+    margin-top: 20px;
+    max-width: 780px; /* Set the width to match the grid */
+    margin: 0 auto; /* Center the category rows */
+}
+
+.category-row {
+    font-size: 18px;
+    padding: 8px;  /* Reduced padding */
+    margin: 6px auto;
+    text-align: center;
+    border-radius: 10px;
+    width: 100%;
+    color: black;
+}
+
+.play-again-button {
+    font-size: 20px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}

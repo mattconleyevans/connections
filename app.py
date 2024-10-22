@@ -3,30 +3,40 @@ from flask import Flask, request, jsonify
 from openai import OpenAI
 import random
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Set your OpenAI API key
 client = OpenAI()
 
 # Function to generate categories
 def generate_categories(theme):
-    prompt = f"Generate four distinct categories based on the theme '{theme}', and give 5 words that fit in each category."
-
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=100
+    prompt = (
+        f"Generate a list of 4 distinct categories of increasing difficulty based on the theme '{theme}', "
+        "and provide 4 words that belong in each category. You should be inspired by the categories in the New York Times game Connections."
+        "The output should follow this exact structure: "
+        "Category 1: [category name], Words: [word1, word2, word3, word4] "
+        "Category 2: [category name], Words: [word1, word2, word3, word4] "
+        "Category 3: [category name], Words: [word1, word2, word3, word4] "
+        "Category 4: [category name], Words: [word1, word2, word3, word4]"
     )
 
-    # Process response
-    categories = response.choices[0].text.strip().split('\n\n')
+    completion = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    categories = completion.choices[0].message.content.split('Category ')[1:]  # Split by category number
     category_list = []
 
     for category in categories:
-        lines = category.strip().split('\n')
-        category_name = lines[0].strip(':')
-        words = [word.strip() for word in lines[1:]]
+        lines = category.split(', Words: ')
+        category_name = lines[0].split(': ')[1].strip('[]')
+        words = [word.strip('[] \n') for word in lines[1].split(', ')]
         category_list.append({'category': category_name, 'words': words})
 
     return category_list
@@ -50,4 +60,4 @@ def generate_game():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5001, debug=True)
